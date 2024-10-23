@@ -1,17 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 
-const ratingSchema = new Schema({
-    star: { type: Number, required: true },
-    comment: { type: String, required: true },
-    date: { type: Date, default: Date.now },
-    role: { type: String, default: "user" },
-    postedby: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-    },
-});
-
 const productTableSchema = new Schema({
     title: { type: String, required: true },
     value: { type: String, required: true },
@@ -34,7 +22,12 @@ const productSchema = new Schema(
             type: [productTableSchema],
             default: [],
         },
-        ratings: [ratingSchema],
+        ratings: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Rating",
+            },
+        ],
         totalrating: {
             type: Number,
             default: 0,

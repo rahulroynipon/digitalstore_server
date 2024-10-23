@@ -1,11 +1,11 @@
-export const DB_NAME = "ECOMMERCE";
+export const DB_NAME = "MAIN_PROJECT_1";
 export const LIMIT = "1mb";
 
 export const COOKIE_OPTIONS = {
     httpOnly: true,
     secure: true,
-    // sameSite: "Strict",
-    // maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    sameSite: "Strict",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 };
 
 export const MAINTENANCE_DAY = 15;

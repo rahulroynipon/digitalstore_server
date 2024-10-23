@@ -2,7 +2,6 @@ import mongoose, { Schema } from "mongoose";
 
 const orderSchema = new Schema(
     {
-        seen: { type: Boolean, default: false },
         products: [
             {
                 product: {
