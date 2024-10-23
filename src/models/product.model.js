@@ -6,7 +6,7 @@ const ratingSchema = new Schema({
     date: { type: Date, default: Date.now },
     role: { type: String, default: "user" },
     postedby: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
         required: true,
     },
@@ -22,7 +22,7 @@ const productSchema = new Schema(
         name: { type: String, unique: true, required: true },
         brand: { type: String, required: true, index: true },
         category: { type: String, required: true, index: true },
-        color: { type: String, required: true },
+        color: { type: [String], required: true },
         stock: { type: Number, required: true },
         sold: { type: Number, required: true },
         price: { type: Number, required: true },
