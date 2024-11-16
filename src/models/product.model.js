@@ -9,7 +9,15 @@ const productSchema = new Schema(
     {
         name: { type: String, unique: true, required: true },
         brand: { type: String, required: true, index: true },
-        category: { type: String, required: true, index: true },
+        category: {
+            type: Schema.Types.ObjectId,
+            ref: "Category",
+            required: true,
+        },
+        subCategory: {
+            type: Schema.Types.ObjectId,
+            ref: "Category.subCategories",
+        },
         color: { type: [String], required: true },
         stock: { type: Number, required: true },
         sold: { type: Number, required: true },

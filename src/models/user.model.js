@@ -8,7 +8,7 @@ const cartSchema = new Schema({
 
 const refreshTokenSchema = new Schema({
     token: { type: String, required: true },
-    expire: { type: Date, default: Date.now, expires: 60 * 60 * 24 * 7 },
+    expire: { type: Date, default: () => Date.now() + 7 * 24 * 60 * 60 * 1000 },
 });
 
 const userSchema = new Schema(
@@ -16,7 +16,7 @@ const userSchema = new Schema(
         googleID: { type: String, unique: true, sparse: true },
         email: { type: String, unique: true, required: true },
         fullname: { type: String, required: true },
-        mobile: { type: String, required: true },
+        mobile: { type: String },
         avatar: { type: String },
         cart: { type: [cartSchema], default: [] },
         password: {
@@ -31,6 +31,7 @@ const userSchema = new Schema(
                 return !!this.googleID;
             },
         },
+        role: { type: String, enum: ["admin", "user"], default: "user" },
         isBlock: { type: Boolean, default: false },
         refreshTokens: { type: [refreshTokenSchema], default: [] },
     },

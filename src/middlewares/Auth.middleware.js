@@ -29,6 +29,7 @@ const verifyToken = asyncHandler(async (req, res, next) => {
     } catch (err) {
         if (err.name === "TokenExpiredError") {
             const refreshToken = req.cookies.refreshToken;
+
             if (!refreshToken) {
                 throw new ApiError(
                     401,
@@ -47,7 +48,9 @@ const verifyToken = asyncHandler(async (req, res, next) => {
                 if (
                     !user ||
                     !user.isValid ||
-                    user.refreshToken.toString() !== refreshToken
+                    !user.refreshTokens.some(
+                        (tokenObj) => tokenObj.token == refreshToken
+                    )
                 ) {
                     throw new ApiError(403, "Invalid refresh token.");
                 }
