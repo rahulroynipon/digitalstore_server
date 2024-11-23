@@ -28,10 +28,12 @@ admin.initializeApp({
 import authRoute from "./routes/auth.router.js";
 import categoryRoute from "./routes/category.route.js";
 import brandRoute from "./routes/brand.route.js";
+import colorRoute from "./routes/color.router.js";
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/brand", brandRoute);
+app.use("/api/v1/color", colorRoute);
 
 app.use((err, req, res, next) => {
     if (err instanceof ApiError) {

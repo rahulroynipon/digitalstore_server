@@ -1,4 +1,5 @@
 import { Brand } from "../models/brand.model.js";
+import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
@@ -38,18 +39,15 @@ const createBrandHandler = asyncHandler(async (req, res) => {
             if (fs.existsSync(filePath)) {
                 fs.unlinkSync(filePath);
             }
-            return res
-                .status(409)
-                .json(new ApiResponse(409, "Brand already exists"));
+
+            throw new ApiError(409, "Brand already exists");
         }
     } catch (error) {
         if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
         }
 
-        return res
-            .status(500)
-            .json(new ApiResponse(500, "Internal Server Error"));
+        throw new ApiError(500, "Internal Server Error");
     }
 });
 
