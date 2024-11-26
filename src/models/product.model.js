@@ -1,30 +1,34 @@
 import mongoose, { Schema } from "mongoose";
 
 const productTableSchema = new Schema({
-    title: { type: String, required: true },
+    label: { type: String, required: true },
     value: { type: String, required: true },
+    required: { type: Boolean, required: true, default: false },
 });
 
 const productSchema = new Schema(
     {
-        name: { type: String, unique: true, required: true },
-        brand: { type: String, required: true, index: true },
+        title: { type: String, unique: true, required: true },
+        brand: {
+            type: Schema.Types.ObjectId,
+            ref: "Brand",
+            required: true,
+            index: true,
+        },
         category: {
             type: Schema.Types.ObjectId,
             ref: "Category",
             required: true,
+            index: true,
         },
-        subCategory: {
-            type: Schema.Types.ObjectId,
-            ref: "Category.subCategories",
-        },
-        color: { type: [String], required: true },
-        stock: { type: Number, required: true },
-        sold: { type: Number, required: true },
+        colors: { type: [String], required: true },
+        stack: { type: Number, required: true },
+        sold: { type: Number, default: 0 },
+        order: { type: Number, default: 0 },
         price: { type: Number, required: true },
         discount: { type: Number, required: true, default: 0 },
         images: { type: [String], default: [] },
-        tags: { type: [String] },
+        tags: { type: [String], required: true },
         description: { type: String, required: true },
         productTable: {
             type: [productTableSchema],
