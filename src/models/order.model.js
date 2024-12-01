@@ -7,12 +7,23 @@ const orderSchema = new Schema(
                 product: {
                     type: Schema.Types.ObjectId,
                     ref: "Product",
+                    required: true,
                 },
-                count: Number,
-                color: String,
+                count: {
+                    type: Number,
+                    required: true,
+                    min: 1,
+                },
+                color: {
+                    type: String,
+                    required: true,
+                },
             },
         ],
-        paymentIntent: {},
+        paymentIntent: {
+            type: Schema.Types.Mixed,
+            required: true,
+        },
         orderStatus: {
             type: String,
             enum: [
@@ -25,9 +36,15 @@ const orderSchema = new Schema(
             ],
             default: "Order Placed",
         },
+        totalOrderValue: {
+            type: Number,
+            default: 0,
+            min: 0,
+        },
         orderby: {
             type: Schema.Types.ObjectId,
             ref: "User",
+            required: true,
         },
     },
     { timestamps: true }

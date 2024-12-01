@@ -3,6 +3,7 @@ import { authorize, verifyToken } from "../middlewares/Auth.middleware.js";
 import {
     createProductHandler,
     deleteProductHandler,
+    getProductById,
     getProductHandler,
 } from "../controllers/product.controller.js";
 import { upload } from "../middlewares/upload.middleware.js";
@@ -21,6 +22,7 @@ router
 
 router
     .route("/:id")
+    .get(getProductById)
     .delete(verifyToken, authorize("admin"), deleteProductHandler);
 
 export default router;

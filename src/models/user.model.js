@@ -33,6 +33,7 @@ const userSchema = new Schema(
         },
         role: { type: String, enum: ["admin", "user"], default: "user" },
         isBlock: { type: Boolean, default: false },
+        isActive: { type: Boolean, default: false },
         refreshTokens: { type: [refreshTokenSchema], default: [] },
     },
     { timestamps: true }
