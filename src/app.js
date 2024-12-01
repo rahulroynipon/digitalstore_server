@@ -4,7 +4,11 @@ import cookieParser from "cookie-parser";
 import { LIMIT } from "./constants.js";
 import { ApiError } from "./utils/ApiError.js";
 import admin from "firebase-admin";
-import serviceAccount from "../serviceAccountKey.json" assert { type: "json" };
+import fs from "fs";
+import path from "path";
+const serviceAccount = JSON.parse(
+    fs.readFileSync(path.resolve("serviceAccountKey.json"), "utf8")
+);
 
 const app = express();
 
