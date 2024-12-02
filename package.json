@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "ecommerce-server",
   "version": "1.0.0",
   "description": "",
@@ -38,47 +37,4 @@
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3"
   }
-=======
-    "name": "ecommerce-server",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "type": "module",
-    "engines": {
-        "node": "22.x"
-    },
-    "scripts": {
-        "start": "node src/index.js",
-        "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-        "expres",
-        "mongoDB",
-        "mongoose",
-        "jwt"
-    ],
-    "author": "Rahul Roy Nipon",
-    "license": "ISC",
-    "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "cloudinary": "^2.4.0",
-        "cookie-parser": "^1.4.6",
-        "cors": "^2.8.5",
-        "crypto": "^1.0.1",
-        "dotenv": "^16.4.5",
-        "express": "^4.19.2",
-        "firebase-admin": "^12.6.0",
-        "jsonwebtoken": "^9.0.2",
-        "mongoose": "^8.5.4",
-        "multer": "^1.4.5-lts.1",
-        "nodemailer": "^6.9.14",
-        "slugify": "^1.6.6",
-        "uniqid": "^5.4.0"
-    },
-    "devDependencies": {
-        "nodemon": "^3.1.4",
-        "prettier": "^3.3.3"
-    }
->>>>>>> 7ba27d04768cdba6efd1272e5a35ea6e1b3af1f6
 }
