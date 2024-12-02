@@ -4,13 +4,13 @@ import cookieParser from "cookie-parser";
 import { LIMIT } from "./constants.js";
 import { ApiError } from "./utils/ApiError.js";
 import admin from "firebase-admin";
-import serviceAccount from "../serviceAccountKey.json" assert { type: "json" };
+import { serviceAccount } from "./constants.js";
 
 const app = express();
 
 app.use(
     cors({
-        origin: process.env.CORS_ORIGIN.split(","),
+        origin: process.env.CORS_ORIGIN,
         credentials: true,
         optionsSuccessStatus: 200,
     })
