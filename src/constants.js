@@ -1,3 +1,5 @@
+console.log(process.env.SERVICE_ACCOUNT_TYPE);
+
 export const serviceAccount = {
     type: process.env.SERVICE_ACCOUNT_TYPE,
     project_id: process.env.SERVICE_ACCOUNT_PROJECT_ID,
