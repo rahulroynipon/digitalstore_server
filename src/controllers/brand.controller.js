@@ -8,7 +8,6 @@ import fs from "fs";
 const createBrandHandler = asyncHandler(async (req, res) => {
     const { brand } = req.body;
     const filePath = req.file.path;
-    console.log(brand);
 
     try {
         const isExisted = await Brand.findOne({ name: brand });

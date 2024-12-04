@@ -5,8 +5,6 @@ import { LIMIT } from "./constants.js";
 import { ApiError } from "./utils/ApiError.js";
 import admin from "firebase-admin";
 import { serviceAccount } from "./constants.js";
-import fs from "fs";
-import path from "path";
 
 const app = express();
 
@@ -19,24 +17,11 @@ app.use(
 );
 app.use(express.json({ limit: LIMIT }));
 app.use(express.urlencoded({ extended: true, limit: LIMIT }));
-app.use(express.static("public"));
+app.use(express.static("src/assets"));
 app.use(cookieParser());
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-});
-
-app.get("/check-folder", (req, res) => {
-    const folderPath = path.join("./", "public/temp");
-
-    fs.access(folderPath, fs.constants.F_OK, (err) => {
-        if (err) {
-            return res.status(404).json({ message: "Folder does not exist" });
-        }
-
-        const files = fs.readdirSync(folderPath);
-        return res.status(200).json({ message: "Folder exists", files });
-    });
 });
 
 // all the route here
