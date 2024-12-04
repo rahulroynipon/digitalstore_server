@@ -22,7 +22,7 @@ export const COOKIE_OPTIONS = {
     sameSite: "None",
     path: "/",
     maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-    domain: process.env.CORS_ORIGIN,
+    domain: process.env.DOMAIN,
 };
 
 export const MAINTENANCE_DAY = 15;
