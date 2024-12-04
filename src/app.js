@@ -72,17 +72,4 @@ app.use((err, req, res, next) => {
     });
 });
 
-const ensureTempFolder = () => {
-    const tempPath = path.join("./", "public/temp");
-
-    if (!fs.existsSync(tempPath)) {
-        fs.mkdirSync(tempPath, { recursive: true });
-        console.log("Temp folder created:", tempPath);
-    } else {
-        console.log("Temp folder already exists.");
-    }
-};
-
-ensureTempFolder();
-
 export { app };

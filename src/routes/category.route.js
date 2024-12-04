@@ -19,6 +19,7 @@ router
         createNewCategoryHandler
     );
 
+
 router
     .route("/:name")
     .delete(verifyToken, authorize("admin"), deleteCategoryHandler);
