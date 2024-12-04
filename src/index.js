@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+const dotenv = await import("dotenv");
 dotenv.config({ path: "./.env" });
 
 import { connectDB } from "./DB/index.js";
