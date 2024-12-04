@@ -2,52 +2,29 @@ import { Brand } from "../models/brand.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import fs from "fs";
 
 const createBrandHandler = asyncHandler(async (req, res) => {
     const { brand } = req.body;
-    const filePath = req.file.path;
 
-    try {
-        const isExisted = await Brand.findOne({ name: brand });
-        let imageUrl;
-        if (!isExisted) {
-            imageUrl = await uploadOnCloudinary(filePath);
-            const newBrand = new Brand({
-                name: brand,
-                image: imageUrl?.url,
-            });
-
-            await newBrand.save();
-
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-            }
-
-            return res
-                .status(201)
-                .json(
-                    new ApiResponse(
-                        201,
-                        newBrand,
-                        "New brand added successfully"
-                    )
-                );
-        } else {
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-            }
-
-            throw new ApiError(409, "Brand already exists");
-        }
-    } catch (error) {
-        if (fs.existsSync(filePath)) {
-            fs.unlinkSync(filePath);
-        }
-
-        throw new ApiError(500, "Internal Server Error");
+    const isExisted = await Brand.findOne({ name: brand });
+    if (isExisted) {
+        throw new ApiError(409, "Brand already exists");
     }
+
+    const imageUrl = req.file?.path;
+
+    console.log(imageUrl);
+
+    const newBrand = new Brand({
+        name: brand,
+        image: imageUrl || null,
+    });
+
+    await newBrand.save();
+
+    return res
+        .status(201)
+        .json(new ApiResponse(201, newBrand, "New brand added successfully"));
 });
 
 const getBrandHandler = asyncHandler(async (req, res) => {

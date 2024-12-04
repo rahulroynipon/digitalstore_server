@@ -2,8 +2,6 @@ import { Product } from "../models/product.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import fs from "fs";
 import { validateMongoDbId } from "../utils/validateMongoDbId.js";
 import { Category } from "../models/category.model.js";
 import { Brand } from "../models/brand.model.js";
@@ -28,33 +26,8 @@ const createProductHandler = asyncHandler(async (req, res) => {
     if (isExisted) {
         throw new ApiError(409, "Product already exists");
     }
-
     const processedTags = tags?.split(",").map((item) => item.trim());
-
-    let imageUrls = [];
-    try {
-        const imageUploadPromises = files.map((file) =>
-            uploadOnCloudinary(file.path)
-        );
-
-        const uploadedImages = await Promise.all(imageUploadPromises);
-        imageUrls = uploadedImages
-            .filter((upload) => upload?.url)
-            .map((upload) => upload.url);
-
-        for (const file of files) {
-            if (fs.existsSync(file.path)) {
-                fs.unlinkSync(file.path);
-            }
-        }
-    } catch (error) {
-        for (const file of files) {
-            if (fs.existsSync(file.path)) {
-                fs.unlinkSync(file.path);
-            }
-        }
-        throw new ApiError(500, "Internal Server Error");
-    }
+    const imageUrls = files.map((file) => file.path);
 
     let productTable;
     try {

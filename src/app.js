@@ -17,7 +17,7 @@ app.use(
 );
 app.use(express.json({ limit: LIMIT }));
 app.use(express.urlencoded({ extended: true, limit: LIMIT }));
-app.use(express.static("src/assets"));
+app.use(express.static("public"));
 app.use(cookieParser());
 
 admin.initializeApp({
