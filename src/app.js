@@ -20,9 +20,12 @@ app.use(express.urlencoded({ extended: true, limit: LIMIT }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 });
+
+
 
 // all the route here
 import authRoute from "./routes/auth.router.js";
