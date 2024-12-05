@@ -5,8 +5,13 @@ import { LIMIT } from "./constants.js";
 import { ApiError } from "./utils/ApiError.js";
 import admin from "firebase-admin";
 import { serviceAccount } from "./constants.js";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import socketHandler from "./socketHandler.js";
 
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
 
 app.use(
     cors({
@@ -57,4 +62,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-export { app };
+socketHandler(io);
+
+export { app, io };

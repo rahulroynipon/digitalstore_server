@@ -40,6 +40,9 @@ const googleAuthHandler = asyncHandler(async (req, res) => {
         delete user.googleID;
         delete user.refreshTokens;
 
+        user.accessToken = accessToken;
+        user.refreshToken = refreshToken;
+
         return res
             .status(200)
             .cookie("accessToken", accessToken, COOKIE_OPTIONS)
