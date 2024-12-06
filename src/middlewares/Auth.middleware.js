@@ -11,8 +11,7 @@ const verifyToken = asyncHandler(async (req, res, next) => {
         process.env.DELIMITER
     );
     let accessToken = req.cookies.accessToken;
-    console.log(accessToken);
-    console.log(accessHeaderTokens);
+    let refreshToken = req.cookies.refreshToken;
 
     if (!accessToken && accessHeaderTokens) {
         accessToken = accessHeaderTokens;
@@ -38,8 +37,6 @@ const verifyToken = asyncHandler(async (req, res, next) => {
         return next();
     } catch (err) {
         if (err.name === "TokenExpiredError") {
-            const refreshToken = req.cookies.refreshToken;
-
             if (!refreshToken && refreshHeaderToken) {
                 refreshToken = refreshHeaderToken;
             }
